@@ -1,0 +1,40 @@
+import random
+
+class Citizen:
+    def __init__(self, name):
+        self.name = name
+        self.happiness_level = random.randint(1, 10)  # Уровень счастья от 1 до 10
+
+    def __repr__(self):
+        return f"{self.name}: {self.happiness_level}"
+
+class City:
+    def __init__(self, name):
+        self.name = name
+        self.citizens = []
+
+    def add_citizen(self, citizen):
+        self.citizens.append(citizen)
+
+    def average_happiness(self):
+        total_happiness = sum(citizen.happiness_level for citizen in self.citizens)
+        return total_happiness / len(self.citizens) if self.citizens else 0
+
+    def __repr__(self):
+        return f"Город {self.name}, Средний уровень счастья: {self.average_happiness():.2f}"
+
+# Создание города и жителей
+city_name = "Счастье.Город"
+city = City(city_name)
+
+# Добавляем 10 жителей в город
+for i in range(1, 11):
+    citizen_name = f"Житель {i}"
+    citizen = Citizen(citizen_name)
+    city.add_citizen(citizen)
+
+# Вывод информации о городе и жителях
+print(city)
+print("Жители города:")
+for citizen in city.citizens:
+    print(citizen)
